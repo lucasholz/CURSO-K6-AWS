@@ -3,30 +3,29 @@ name: K6 load test
 on: [push]
 
 jobs: 
-  protocol:
-      runs-on: ubuntu-latest
-      steps:
-        - name: step 1 - checkout
-          uses: actions/checkout@v2
+  build: 
+  name: K6 load test
+  runs-on: ubuntu-latest
+  steps:
+    - name: step 1 - checkout
+      uses: actions/checkout@v4
 
-        - name: step 2 - run k6 setup
-          uses: grafana/setup-k6-action@v1
+    - name: step 2 - run k6 load test
+      uses: grafana/setup-k6-action@v1
+      uses: grafana/run-k6-action@v1
+      with:
+        filename: scripts/test.js
+  # protocol:
+  #     runs-on: ubuntu-latest
+  #     steps:
+  #       - name: step 1 - checkout
+  #         uses: actions/checkout@v2
 
-        - name: step 3 - run k6 test
-          uses: grafana/run-k6-action@v1
-          with:
-            path: ./scripts/test.js
+  #       - name: step 2 - run k6 setup
+  #         uses: grafana/setup-k6-action@v1
 
+  #       - name: step 3 - run k6 test
+  #         uses: grafana/run-k6-action@v1
+  #         with:
+  #           path: ./scripts/test.js
 
-  # Comentado
-  # build: K6 load test
-  # runs-on: ubuntu-latest
-  # steps:
-  #   - name: step 1 - checkout
-  #     uses: actions/checkout@v4
-
-  #   - name: step 2 - run k6 load test
-  #     uses: grafana/setup-k6-action@v1
-  #     uses: grafana/run-k6-action@v1
-  #     with:
-  #       filename: scripts/test.js
